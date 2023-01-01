@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.textview)
         val imageView = findViewById<ImageView>(R.id.img_logo_quizzine)
         textView.text = "Bienvenue sur notre jeu de quizz :"
-        imageView.setImageResource(R.drawable.placeholder)
+        imageView.setImageResource(R.drawable.logo_quizzin)
 
     }
     fun startQuizzCuisine(view: View) {
