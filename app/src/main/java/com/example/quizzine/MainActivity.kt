@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val textView = findViewById<TextView>(R.id.textview)
-        textView.text = "hey"
+        textView.text = "TEST MARCHE NTM STP"
 
     }
     fun startQuizz(view: View) {
