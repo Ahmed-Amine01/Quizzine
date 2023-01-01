@@ -112,7 +112,7 @@ class Quizz : AppCompatActivity() {
     }
 
     fun checkQuizzCount(){
-        if(quizzCount == 1){
+        if(quizzCount == 2){
 
             AlertDialog.Builder(this)
                 .setTitle("Fin ")
@@ -146,15 +146,17 @@ class Quizz : AppCompatActivity() {
                 val responseBody = response?.body()!!
                 val myStringBuilder = StringBuilder()
                 val listQ=mutableListOf<DataItem>()
+                Log.d("QuizzActivity2", responseBody.toString())
+
 
                 for (myData in responseBody){
-                    listQ+myData
+                    listQ+=myData
 
                 }
-                quizzData = listQ
+                quizzData+=listQ
 
                 nextQ()
-                println("Ceci est un message de la console")
+
 
 
             }
@@ -162,6 +164,7 @@ class Quizz : AppCompatActivity() {
 
             override fun onFailure(call: Call<List<DataItem>?>?, t: Throwable?) {
                 Log.d("QuizzActivity","Failed request")
+                t?.message?.let { Log.d("QuizzActivity", it) }
             }
         })
     }
