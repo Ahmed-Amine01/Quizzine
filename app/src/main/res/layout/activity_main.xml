@@ -26,18 +26,46 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.172" />
+
 
         <Button
-            android:id="@+id/btn_run"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="196dp"
+            android:id="@+id/btn_femmes"
+            android:layout_width="127dp"
+            android:layout_height="112dp"
+            android:text="Quiz sur les femmes"
             android:onClick="startQuizz"
-            android:text="Lancer le quizz"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.463" />
+
+        <Button
+            android:id="@+id/btn_cuisine"
+            android:layout_width="127dp"
+            android:layout_height="112dp"
+            android:text="Quiz sur la cuisine"
+            android:onClick="startQuizz"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.887"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.463" />
+
+        <ImageView
+            android:id="@+id/img_logo_quizzine"
+            android:layout_width="190dp"
+            android:layout_height="130dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.131"
+            tools:srcCompat="@drawable/placeholder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
