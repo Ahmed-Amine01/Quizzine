@@ -128,7 +128,7 @@ class Quizz : AppCompatActivity() {
     }
 
     fun checkQuizzCount(){
-        if(quizzCount == 2){
+        if( quizzData.size == 0){
 
             AlertDialog.Builder(this)
                 .setTitle("Fin ")
@@ -162,7 +162,7 @@ class Quizz : AppCompatActivity() {
     private fun getData() {
         val retrofitBuilder = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).build().create(ApiInterface::class.java)
         var data = retrofitBuilder.getDataFemme()
-        
+
         if(route=="cuisine"){
              data = retrofitBuilder.getDataCuisine()
         }
