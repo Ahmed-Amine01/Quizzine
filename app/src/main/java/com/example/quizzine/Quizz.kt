@@ -22,6 +22,10 @@ class Quizz : AppCompatActivity() {
     private lateinit var binding:ActivityQuizzBinding
     //private lateinit var bindingMain:ActivityMainBinding
     val BASE_URL = "https://jsonplaceholder.typicode.com/posts/"
+    private var quizzData = mutableListOf<DataItem>()
+     val int quizzCount = 0
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,10 +34,30 @@ class Quizz : AppCompatActivity() {
             setContentView(
                 this, R.layout.activity_quizz
             )
-
         setContentView(binding.root)
-        lancerQuizz("QUESTION BLALALALAL")
         getData()
+    }
+
+    fun nextQ(){
+        val correctAnswer = quizzData[0].correctAnswer
+
+        binding.question.text = quizzData[0].question
+        binding.button1.text = quizzData[0].r1
+        binding.button2.text = quizzData[0].r2
+        binding.button3.text = quizzData[0].r3
+        binding.button4.text = quizzData[0].r4
+
+        quizzData.removeAt(0)
+
+
+    }
+
+    fun checkAnswer(){
+
+    }
+
+    fun checkQuizzCount(){
+
     }
 
     private fun getData() {
@@ -46,14 +70,13 @@ class Quizz : AppCompatActivity() {
             ) {
                 val responseBody = response?.body()!!
                 val myStringBuilder = StringBuilder()
+                val listQ=mutableListOf<DataItem>()
 
                 for (myData in responseBody){
-                    myStringBuilder.append(myData.title)
-                    break
+                    listQ+myData
+
                 }
-                binding.question.text = myStringBuilder
-
-
+                quizzData = listQ
 
             }
 
@@ -64,15 +87,7 @@ class Quizz : AppCompatActivity() {
     }
 
 
-    fun lancerQuizz(question: String) {
 
-        binding.question.text = question;
-        binding.button1.text = "rep1";
-        binding.button2.text = "rep2";
-        binding.button3.text = "rep3";
-        binding.button4.text = "rep4";
-
-    }
 
 
 }
