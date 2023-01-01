@@ -5,6 +5,9 @@ import retrofit2.http.GET
 
 interface ApiInterface {
     // endpoint a mettre
-    @GET("getData")
-    fun getData():Call<List<DataItem>>
+    @GET("cuisine")
+    fun getDataCuisine():Call<List<DataItem>>
+
+    @GET("femme")
+    fun getDataFemme():Call<List<DataItem>>
 }

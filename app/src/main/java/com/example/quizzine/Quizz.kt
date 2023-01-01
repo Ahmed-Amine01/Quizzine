@@ -41,6 +41,8 @@ class Quizz : AppCompatActivity() {
         if (intent.hasExtra("route")) {
             val value = intent.extras?.get("route") // Utiliser la valeur
             route = value as String
+
+
         }
 
         binding.button1.setOnClickListener {
@@ -69,7 +71,8 @@ class Quizz : AppCompatActivity() {
                 checkAnswer(binding.button4.text as String)
 
         }
-        getData()
+      getData()
+
 
 
 
@@ -129,12 +132,17 @@ class Quizz : AppCompatActivity() {
 
             AlertDialog.Builder(this)
                 .setTitle("Fin ")
-                .setMessage("Bravo vous avez fini le quiz")
-                .setPositiveButton("Next") { dialog, which ->
-                    dialog.dismiss()
+                .setMessage("Bravo vous avez fini le quiz! Souhaitez vous partager par mail votre score a un amis ?")
+               .setPositiveButton("Oui") { dialog, id ->
+                    shareViaGmail("Hey J'ai fait un score de $correctCount !!!")
+                   finish()
 
+            }
+                .setNegativeButton("Non et Passer") { dialog, id ->
+                    dialog.dismiss()
                     endGame()
-                }.setCancelable(false)
+                }
+                .setCancelable(false)
                 .show()
 
         } else {
@@ -144,37 +152,33 @@ class Quizz : AppCompatActivity() {
     }
 
     private fun endGame() {
-        shareViaGmail("J'ai fais un SUPER SCORE de $correctCount. Vient essayer de battre mon score")
+       // shareViaGmail("J'ai fais un SUPER SCORE de $correctCount. Vient essayer de battre mon score")
 
-       // val intent = Intent(this, MainActivity::class.java)
-        //startActivity(intent)
-        //finish()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun getData() {
-        val retrofitBuilder = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL+route).build().create(ApiInterface::class.java)
-        val data = retrofitBuilder.getData()
+        val retrofitBuilder = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).build().create(ApiInterface::class.java)
+        var data = retrofitBuilder.getDataFemme()
+        
+        if(route=="cuisine"){
+             data = retrofitBuilder.getDataCuisine()
+        }
+
         data.enqueue(object : Callback<List<DataItem>?> {
             override fun onResponse(
                 call: Call<List<DataItem>?>?,
                 response: Response<List<DataItem>?>?
             ) {
                 val responseBody = response?.body()!!
-                val myStringBuilder = StringBuilder()
                 val listQ=mutableListOf<DataItem>()
-                Log.d("QuizzActivity2", responseBody.toString())
-
-
-                for (myData in responseBody){
-                    listQ+=myData
-
+                for (myData in responseBody) {
+                    listQ += myData
                 }
-                quizzData+=listQ
-
+                quizzData += listQ
                 nextQ()
-
-
-
             }
 
 
