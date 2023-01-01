@@ -7,31 +7,29 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import android.widget.TextView
-import com.example.quizzine.databinding.ActivityMainBinding
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil.setContentView
+
+import com.example.quizzine.databinding.ActivityQuizzBinding
 
 class Quizz : AppCompatActivity() {
-    private lateinit var binding:ActivityMainBinding
-
+    private lateinit var binding:ActivityQuizzBinding
+    //private lateinit var bindingMain:ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityMainBinding.inflate(layoutInflater)
+        val binding: ActivityQuizzBinding =
+            setContentView(
+                this, R.layout.activity_quizz
+            )
 
         setContentView(binding.root)
-
-
-
         lancerQuizz("QUESTION BLALALALAL")
     }
 
 
     fun lancerQuizz(question: String) {
-       binding.question_id.text = question;
-
-
-
-
 
 
     }

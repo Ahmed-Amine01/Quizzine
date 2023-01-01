@@ -7,6 +7,10 @@ android {
     namespace 'com.example.quizzine'
     compileSdk 32
 
+    buildFeatures {
+        dataBinding true
+    }
+
     defaultConfig {
         applicationId "com.example.quizzine"
         minSdk 22
@@ -24,9 +28,7 @@ android {
         }
     }
 
-    buildFeatures {
-        viewBinding true
-    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
