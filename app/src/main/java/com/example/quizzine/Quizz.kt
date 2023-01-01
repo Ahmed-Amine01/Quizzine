@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.setContentView
+import android.net.Uri
 
 import com.example.quizzine.databinding.ActivityQuizzBinding
 import retrofit2.Call
@@ -21,12 +22,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Quizz : AppCompatActivity() {
     private lateinit var binding:ActivityQuizzBinding
-    //private lateinit var bindingMain:ActivityMainBinding
     val BASE_URL = "http://192.168.44.128:2000/"
     private var quizzData = mutableListOf<DataItem>()
-     private var  quizzCount = 0
-
+    private var  quizzCount = 0
+    var correctCount = 0
     var correctAnswer = ""
+    var route =""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +37,11 @@ class Quizz : AppCompatActivity() {
                 this, R.layout.activity_quizz
             )
         setContentView(binding.root)
+        val intent = intent
+        if (intent.hasExtra("route")) {
+            val value = intent.extras?.get("route") // Utiliser la valeur
+            route = value as String
+        }
 
         binding.button1.setOnClickListener {
             // vérifier l'identifiant du bouton qui a été cliqué
@@ -63,7 +69,6 @@ class Quizz : AppCompatActivity() {
                 checkAnswer(binding.button4.text as String)
 
         }
-
         getData()
 
 
@@ -88,7 +93,14 @@ class Quizz : AppCompatActivity() {
 
     }
 
-
+    fun shareViaGmail(text: String) {
+        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_SUBJECT, "Rejoint moi sur Quizz In")
+            putExtra(Intent.EXTRA_TEXT, text)
+        }
+        startActivity(Intent.createChooser(emailIntent, null))
+    }
 
 
     fun checkAnswer(answer:String){
@@ -96,6 +108,7 @@ class Quizz : AppCompatActivity() {
         quizzCount++
 
         if(answer == correctAnswer){
+            correctCount++
             alertTitle = "Correct !"
 
         } else {
@@ -119,6 +132,7 @@ class Quizz : AppCompatActivity() {
                 .setMessage("Bravo vous avez fini le quiz")
                 .setPositiveButton("Next") { dialog, which ->
                     dialog.dismiss()
+
                     endGame()
                 }.setCancelable(false)
                 .show()
@@ -130,13 +144,15 @@ class Quizz : AppCompatActivity() {
     }
 
     private fun endGame() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+        shareViaGmail("J'ai fais un SUPER SCORE de $correctCount. Vient essayer de battre mon score")
+
+       // val intent = Intent(this, MainActivity::class.java)
+        //startActivity(intent)
+        //finish()
     }
 
     private fun getData() {
-        val retrofitBuilder = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).build().create(ApiInterface::class.java)
+        val retrofitBuilder = Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL+route).build().create(ApiInterface::class.java)
         val data = retrofitBuilder.getData()
         data.enqueue(object : Callback<List<DataItem>?> {
             override fun onResponse(

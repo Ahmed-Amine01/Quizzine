@@ -19,11 +19,21 @@ class MainActivity : AppCompatActivity() {
         imageView.setImageResource(R.drawable.placeholder)
 
     }
-    fun startQuizz(view: View) {
+    fun startQuizzCuisine(view: View) {
         val intent = Intent(this, Quizz::class.java)
+        intent.putExtra("route", "cuisine");
+        startActivity(intent)
+
+        finish()
+    }
+
+    fun startQuizzFemme(view: View) {
+        val intent = Intent(this, Quizz::class.java)
+        intent.putExtra("route", "femme");
         startActivity(intent)
         finish()
     }
+
 
 
 }
