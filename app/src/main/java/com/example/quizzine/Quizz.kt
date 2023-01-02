@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Quizz : AppCompatActivity() {
     private lateinit var binding:ActivityQuizzBinding
-    val BASE_URL = "http://192.168.44.128:2000/"
+    val BASE_URL = "http://163.173.118.136:2000/"
     private var quizzData = mutableListOf<DataItem>()
     private var  quizzCount = 0
     var correctCount = 0
@@ -154,7 +154,8 @@ class Quizz : AppCompatActivity() {
     private fun endGame() {
        // shareViaGmail("J'ai fais un SUPER SCORE de $correctCount. Vient essayer de battre mon score")
 
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, ScoreActivity::class.java)
+        intent.putExtra("SCORE",correctCount)
         startActivity(intent)
         finish()
     }
@@ -165,9 +166,6 @@ class Quizz : AppCompatActivity() {
 
         if(route=="cuisine"){
              data = retrofitBuilder.getDataCuisine()
-        }
-        else{
-            data = retrofitBuilder.getDataFemme()
         }
 
         data.enqueue(object : Callback<List<DataItem>?> {
