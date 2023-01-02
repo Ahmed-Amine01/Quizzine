@@ -112,10 +112,10 @@ class Quizz : AppCompatActivity() {
 
         if(answer == correctAnswer){
             correctCount++
-            alertTitle = "Correct !"
+            alertTitle = "Bonne réponse !"
 
         } else {
-            alertTitle = "Wrong !"
+            alertTitle = "Mauvaise réponse !"
         }
         AlertDialog.Builder(this)
             .setTitle(alertTitle)
@@ -165,6 +165,9 @@ class Quizz : AppCompatActivity() {
 
         if(route=="cuisine"){
              data = retrofitBuilder.getDataCuisine()
+        }
+        else{
+            data = retrofitBuilder.getDataFemme()
         }
 
         data.enqueue(object : Callback<List<DataItem>?> {
