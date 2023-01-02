@@ -3,7 +3,6 @@ package com.example.quizzine
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.quizzine.databinding.ActivityQuizzBinding
 import com.example.quizzine.databinding.ActivityScoreBinding
 
 class ScoreActivity : AppCompatActivity() {
