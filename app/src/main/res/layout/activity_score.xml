@@ -5,6 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/back"
         tools:context=".ScoreActivity">
 
         <TextView
@@ -12,6 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Score :"
+            android:textColor="@color/white"
             android:textSize="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +27,7 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="40dp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -39,6 +42,7 @@
             android:layout_gravity="center"
             android:layout_margin="4dp"
             android:background="@drawable/round_button"
+            android:backgroundTint="#FF9A04"
             android:padding="6dp"
             android:text="MENU"
             app:layout_constraintBottom_toBottomOf="parent"
